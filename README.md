@@ -1,1 +1,1 @@
-https://dyloly.github.io/web
+Dyloly.github.io
