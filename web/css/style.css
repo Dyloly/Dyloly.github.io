@@ -1,55 +1,75 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: sans-serif;
     background-color: #f4f4f4;
-    color: #333;
-    display: flex; /* Naudojame Flexbox, kad turinys būtų centre */
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-main {
-    flex-grow: 1; /* Leidžia main sekcijai užimti visą likusią erdvę */
-    padding: 2rem;
-    text-align: center;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-#tekstas {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+.container {
+    width: 90%;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Sklandus perėjimas užvedus pelę */
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #333;
-    color: white;
+h1 {
     text-align: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
+    color: #333;
+}
+
+.input-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#companyName {
+    width: 70%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+tfoot td {
+    font-weight: bold;
+    background-color: #f2f2f2;
+    text-align: right;
+}
+
+tfoot #totalScore {
+    text-align: center;
 }
