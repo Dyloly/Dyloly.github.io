@@ -2,45 +2,153 @@ document.addEventListener('DOMContentLoaded', () => {
     const table = document.getElementById('evaluationTable');
     const inputs = table.querySelectorAll('.data-input');
     const totalScoreElement = document.getElementById('totalScore');
+    const finalRatingElement = document.getElementById('finalRating');
 
-    function calculateTotalScore() {
+    function calculateScore(value, rules) {
+        if (value === null || value === '' || isNaN(value)) {
+            // Check for non-numerical inputs for text-based rules
+            const lowerValue = String(value).toLowerCase().trim();
+            for (const rule of rules) {
+                if (rule.text && rule.text.toLowerCase().trim() === lowerValue) {
+                    return rule.points;
+                }
+            }
+            return 0;
+        }
+
+        // Check for numerical inputs
+        const numValue = parseFloat(value);
+        for (const rule of rules) {
+            if (rule.min !== undefined && rule.max !== undefined) {
+                if (numValue >= rule.min && numValue <= rule.max) {
+                    return rule.points;
+                }
+            } else if (rule.min !== undefined) {
+                if (numValue >= rule.min) {
+                    return rule.points;
+                }
+            } else if (rule.max !== undefined) {
+                if (numValue < rule.max) {
+                    return rule.points;
+                }
+            }
+        }
+        return 0;
+    }
+
+    const scoringRules = {
+        'ROE': [
+            { min: 15, points: 2 },
+            { min: 10, max: 15, points: 1 },
+            { max: 10, points: 0 }
+        ],
+        'ROIC': [
+            { min: 12, points: 2 },
+            { min: 8, max: 12, points: 1 },
+            { max: 8, points: 0 }
+        ],
+        'Net Profit Margin': [
+            { text: 'above industry', points: 2 },
+            { text: 'equal to industry', points: 1 },
+            { text: 'below industry', points: 0 }
+        ],
+        'Operating Margin Trend': [
+            { text: 'increasing', points: 2 },
+            { text: 'stable', points: 1 },
+            { text: 'declining', points: 0 }
+        ],
+        'P/E Ratio': [
+            { text: 'below industry', points: 2 },
+            { text: 'equal to industry', points: 1 },
+            { text: 'above industry', points: 0 }
+        ],
+        'P/B Ratio': [
+            { max: 1.5, points: 2 },
+            { min: 1.5, max: 3, points: 1 },
+            { min: 3, points: 0 }
+        ],
+        'EV/EBITDA': [
+            { text: 'below industry', points: 2 },
+            { text: 'equal to industry', points: 1 },
+            { text: 'above industry', points: 0 }
+        ],
+        'Free Cash Flow Yield': [
+            { min: 5, points: 2 },
+            { min: 3, max: 5, points: 1 },
+            { max: 3, points: 0 }
+        ],
+        'Debt-to-Equity': [
+            { max: 0.5, points: 2 },
+            { min: 0.5, max: 1, points: 1 },
+            { min: 1, points: 0 }
+        ],
+        'Current Ratio': [
+            { min: 1.5, points: 2 },
+            { min: 1, max: 1.5, points: 1 },
+            { max: 1, points: 0 }
+        ],
+        'Interest Coverage Ratio': [
+            { min: 5, points: 2 },
+            { min: 3, max: 5, points: 1 },
+            { max: 3, points: 0 }
+        ],
+        'Revenue Growth': [
+            { min: 10, points: 2 },
+            { min: 5, max: 10, points: 1 },
+            { max: 5, points: 0 }
+        ],
+        'EPS Growth': [
+            { min: 10, points: 2 },
+            { min: 5, max: 10, points: 1 },
+            { max: 5, points: 0 }
+        ],
+        'FCF Growth': [
+            { text: 'positive', points: 2 },
+            { text: 'flat/negative', points: 0 }
+        ],
+        'Asset Turnover Ratio': [
+            { text: 'above industry', points: 2 },
+            { text: 'equal to industry', points: 1 },
+            { text: 'below industry', points: 0 }
+        ],
+        'ROIC > WACC': [
+            { text: 'yes', points: 2 },
+            { text: 'no', points: 0 }
+        ],
+        'Share Buybacks': [
+            { text: 'consistent buybacks', points: 2 },
+            { text: 'no buybacks/dilution', points: 0 }
+        ],
+        'Dividend Yield': [
+            { text: 'above industry', points: 2 },
+            { text: 'equal to industry', points: 1 },
+            { text: 'below industry', points: 0 }
+        ],
+        'Payout Ratio': [
+            { max: 60, points: 2 },
+            { min: 60, max: 80, points: 1 },
+            { min: 80, points: 0 }
+        ]
+    };
+
+    function getFinalRating(score) {
+        if (score >= 35) return 'Stiprus pirkimas (Puikūs pagrindai, neįvertinta)';
+        if (score >= 25) return 'Vidutinis pirkimas (Geri, bet patikrinkite rizikas)';
+        if (score >= 15) return 'Neutralu/Laikyti (Vidutinis, reikia stebėti)';
+        return 'Vengti/Parduoti (Silpni pagrindai arba pervertinta)';
+    }
+
+    function updateTable() {
         let totalScore = 0;
         inputs.forEach(input => {
             const row = input.closest('tr');
             const pointsCell = row.querySelector('.points');
-            
-            // Check if the input value is a number or a specific character
-            const value = input.value.trim();
-            const pointsForThisRow = parseInt(input.getAttribute('data-points'), 10);
+            const criteria = input.getAttribute('data-value');
+            const rules = scoringRules[criteria];
             let score = 0;
 
-            if (value !== '') {
-                // Here you can add your custom logic to award points based on the input value
-                // For a simple version, we'll just check if the input is not empty
-                // You can expand this logic for more complex scoring
-                
-                // Example: If a specific value is entered, assign points
-                if (pointsForThisRow > 0) {
-                     score = pointsForThisRow;
-                } else {
-                     // Default to 0 if no specific points are assigned for non-empty value
-                     score = 0;
-                }
-
-                // A specific logic for P/B Ratio based on the provided image
-                if (input.dataset.value === 'P/B Ratio') {
-                    const pbValue = parseFloat(value);
-                    if (!isNaN(pbValue) && pbValue <= 2.58) {
-                        score = 1; // Assuming 1 point for a value <= 2.58 based on the image
-                    } else {
-                        score = 0;
-                    }
-                }
-                
-                // Add more complex logic here for other rows if needed, e.g.:
-                // if (input.dataset.value === 'ROE') { ... }
-                // if (input.dataset.value === 'Revenue Growth') { ... }
-
+            if (rules) {
+                score = calculateScore(input.value, rules);
             }
 
             pointsCell.textContent = score;
@@ -48,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         totalScoreElement.textContent = totalScore;
+        finalRatingElement.textContent = getFinalRating(totalScore);
     }
 
     inputs.forEach(input => {
-        input.addEventListener('input', calculateTotalScore);
+        input.addEventListener('input', updateTable);
     });
 
-    // Initial calculation on page load
-    calculateTotalScore();
+    updateTable();
 });

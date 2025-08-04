@@ -73,3 +73,10 @@ tfoot td {
 tfoot #totalScore {
     text-align: center;
 }
+
+.category-header td {
+    background-color: #e0e0e0 !important;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
