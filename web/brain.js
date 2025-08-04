@@ -3,21 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputs = table.querySelectorAll('.data-input');
     const totalScoreElement = document.getElementById('totalScore');
     const finalRatingElement = document.getElementById('finalRating');
+    const calculateButton = document.getElementById('calculateButton');
 
     function calculateScore(value, rules) {
-        if (value === null || value === '' || isNaN(value)) {
-            // Check for non-numerical inputs for text-based rules
-            const lowerValue = String(value).toLowerCase().trim();
-            for (const rule of rules) {
-                if (rule.text && rule.text.toLowerCase().trim() === lowerValue) {
-                    return rule.points;
-                }
+        // Handle text-based rules first
+        const lowerValue = String(value).toLowerCase().trim();
+        for (const rule of rules) {
+            if (rule.text && rule.text.toLowerCase().trim() === lowerValue) {
+                return rule.points;
             }
+        }
+
+        // If not a text rule, try to parse as a number
+        const numValue = parseFloat(value);
+        if (isNaN(numValue)) {
             return 0;
         }
 
-        // Check for numerical inputs
-        const numValue = parseFloat(value);
+        // Handle numerical rules
         for (const rule of rules) {
             if (rule.min !== undefined && rule.max !== undefined) {
                 if (numValue >= rule.min && numValue <= rule.max) {
@@ -148,7 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let score = 0;
 
             if (rules) {
-                score = calculateScore(input.value, rules);
+                // Remove '%' sign from input value if it exists for numerical calculations
+                const inputValue = input.value.replace('%', '').trim();
+                score = calculateScore(inputValue, rules);
             }
 
             pointsCell.textContent = score;
@@ -159,9 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         finalRatingElement.textContent = getFinalRating(totalScore);
     }
 
-    inputs.forEach(input => {
-        input.addEventListener('input', updateTable);
-    });
-
-    updateTable();
+    // Attach the event listener to the button
+    calculateButton.addEventListener('click', updateTable);
 });

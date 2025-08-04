@@ -80,3 +80,30 @@ tfoot #totalScore {
     text-align: center;
     color: #333;
 }
+
+.category-header td {
+    background-color: #e0e0e0 !important;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#calculateButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#calculateButton:hover {
+    background-color: #0056b3;
+}
