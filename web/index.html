@@ -1,152 +1,137 @@
 <!DOCTYPE html>
-<html lang="lt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Įmonės Įvertinimas</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Investment Scoring Tool</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>Įmonės Įvertinimas</h1>
-        <div class="input-section">
-            <label for="companyName">Įmonės Pavadinimas:</label>
-            <input type="text" id="companyName">
-        </div>
-        
-        <table id="evaluationTable">
+    <h1>Investment Scoring Tool</h1>
+    <form id="scoreForm">
+        <table>
             <thead>
-                <tr>
-                    <th>Kriterijai</th>
-                    <th>Duomenys</th>
-                    <th>Balai</th>
-                </tr>
+                <tr><th>Category</th><th>Indicator</th><th>Input</th><th>Points</th></tr>
             </thead>
             <tbody>
-                <tr class="category-header"><td colspan="3">1. Pelningumas (Max: 10 balų)</td></tr>
+                <!-- PROFITABILITY -->
+                <tr class="category-header"><td colspan="4">Profitability (Max: 10)</td></tr>
                 <tr>
-                    <td>ROE (Return on Equity)</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="ROE" placeholder="pvz., 15.5"> %</td>
-                    <td class="points">0</td>
+                    <td>Profitability</td><td>ROE (%)</td>
+                    <td><input type="number" id="roe"></td><td id="roePoints">0</td>
                 </tr>
                 <tr>
-                    <td>ROIC (Return on Invested Capital)</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="ROIC" placeholder="pvz., 12.1"> %</td>
-                    <td class="points">0</td>
+                    <td>Profitability</td><td>ROIC (%)</td>
+                    <td><input type="number" id="roic"></td><td id="roicPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Grynasis pelno marža (palyginti su pramonės vidurkiu)</td>
-                    <td><input type="text" class="data-input" data-value="Net Profit Margin" placeholder="pvz., 'Virš' arba 'Lygus'"></td>
-                    <td class="points">0</td>
+                    <td>Profitability</td><td>Net Profit Margin</td>
+                    <td><input type="text" id="npm"></td><td id="npmPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Veiklos maržos tendencija (per 3 metus)</td>
-                    <td><input type="text" class="data-input" data-value="Operating Margin Trend" placeholder="pvz., 'Didėjanti' arba 'Stabili'"></td>
-                    <td class="points">0</td>
+                    <td>Profitability</td><td>Operating Margin Trend</td>
+                    <td><input type="text" id="omt"></td><td id="omtPoints">0</td>
                 </tr>
 
-                <tr class="category-header"><td colspan="3">2. Vertinimas (Max: 10 balų)</td></tr>
+                <!-- VALUATION -->
+                <tr class="category-header"><td colspan="4">Valuation (Max: 10)</td></tr>
                 <tr>
-                    <td>P/E Santykis (palyginti su pramonės vidurkiu)</td>
-                    <td><input type="text" class="data-input" data-value="P/E Ratio" placeholder="pvz., 'Žemiau' arba 'Lygus'"></td>
-                    <td class="points">0</td>
+                    <td>Valuation</td><td>P/E vs Industry</td>
+                    <td><input type="text" id="pe"></td><td id="pePoints">0</td>
                 </tr>
                 <tr>
-                    <td>P/B Santykis</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="P/B Ratio" placeholder="pvz., 1.45"></td>
-                    <td class="points">0</td>
+                    <td>Valuation</td><td>P/B Ratio</td>
+                    <td><input type="number" id="pb"></td><td id="pbPoints">0</td>
                 </tr>
                 <tr>
-                    <td>EV/EBITDA (palyginti su pramonės vidurkiu)</td>
-                    <td><input type="text" class="data-input" data-value="EV/EBITDA" placeholder="pvz., 'Žemiau' arba 'Lygus'"></td>
-                    <td class="points">0</td>
+                    <td>Valuation</td><td>EV/EBITDA vs Industry</td>
+                    <td><input type="text" id="ev"></td><td id="evPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Laisvo pinigų srauto pelningumas</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Free Cash Flow Yield" placeholder="pvz., 5.1"> %</td>
-                    <td class="points">0</td>
+                    <td>Valuation</td><td>Free Cash Flow Yield (%)</td>
+                    <td><input type="number" id="fcfy"></td><td id="fcfyPoints">0</td>
                 </tr>
 
-                <tr class="category-header"><td colspan="3">3. Finansinė būklė (Max: 8 balai)</td></tr>
+                <!-- FINANCIAL HEALTH -->
+                <tr class="category-header"><td colspan="4">Financial Health (Max: 8)</td></tr>
                 <tr>
-                    <td>Skolos-nuosavybės (D/E) santykis</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Debt-to-Equity" placeholder="pvz., 0.45"></td>
-                    <td class="points">0</td>
+                    <td>Financial</td><td>D/E Ratio</td>
+                    <td><input type="number" id="de"></td><td id="dePoints">0</td>
                 </tr>
                 <tr>
-                    <td>Einamasis santykis</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Current Ratio" placeholder="pvz., 1.55"></td>
-                    <td class="points">0</td>
+                    <td>Financial</td><td>Current Ratio</td>
+                    <td><input type="number" id="cr"></td><td id="crPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Palūkanų padengimo santykis</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Interest Coverage Ratio" placeholder="pvz., 5.2"></td>
-                    <td class="points">0</td>
+                    <td>Financial</td><td>Interest Coverage</td>
+                    <td><input type="number" id="icr"></td><td id="icrPoints">0</td>
                 </tr>
 
-                <tr class="category-header"><td colspan="3">4. Augimas (Max: 6 balai)</td></tr>
+                <!-- GROWTH -->
+                <tr class="category-header"><td colspan="4">Growth (Max: 6)</td></tr>
                 <tr>
-                    <td>Pajamų augimas (3 metų vidurkis)</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Revenue Growth" placeholder="pvz., 10.5"> %</td>
-                    <td class="points">0</td>
+                    <td>Growth</td><td>Revenue Growth (%)</td>
+                    <td><input type="number" id="rev"></td><td id="revPoints">0</td>
                 </tr>
                 <tr>
-                    <td>EPS augimas (3 metų vidurkis)</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="EPS Growth" placeholder="pvz., 10.5"> %</td>
-                    <td class="points">0</td>
+                    <td>Growth</td><td>EPS Growth (%)</td>
+                    <td><input type="number" id="eps"></td><td id="epsPoints">0</td>
                 </tr>
                 <tr>
-                    <td>FCF augimas (3 metų vidurkis)</td>
-                    <td><input type="text" class="data-input" data-value="FCF Growth" placeholder="pvz., 'Teigiamas'"></td>
-                    <td class="points">0</td>
+                    <td>Growth</td><td>FCF Growth</td>
+                    <td><input type="text" id="fcfg"></td><td id="fcfgPoints">0</td>
                 </tr>
 
-                <tr class="category-header"><td colspan="3">5. Efektyvumas ir valdymas (Max: 6 balai)</td></tr>
+                <!-- EFFICIENCY -->
+                <tr class="category-header"><td colspan="4">Efficiency & Management (Max: 6)</td></tr>
                 <tr>
-                    <td>Turto apyvartos santykis (palyginti su pramonės vidurkiu)</td>
-                    <td><input type="text" class="data-input" data-value="Asset Turnover Ratio" placeholder="pvz., 'Virš'"></td>
-                    <td class="points">0</td>
+                    <td>Efficiency</td><td>Asset Turnover vs Industry</td>
+                    <td><input type="text" id="ato"></td><td id="atoPoints">0</td>
                 </tr>
                 <tr>
-                    <td>ROIC > WACC</td>
-                    <td><input type="text" class="data-input" data-value="ROIC > WACC" placeholder="pvz., 'Taip'"></td>
-                    <td class="points">0</td>
+                    <td>Efficiency</td><td>ROIC > WACC</td>
+                    <td><input type="text" id="rw"></td><td id="rwPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Akcijų supirkimas (jei taikoma)</td>
-                    <td><input type="text" class="data-input" data-value="Share Buybacks" placeholder="pvz., 'Nuosekliai'"></td>
-                    <td class="points">0</td>
+                    <td>Efficiency</td><td>Share Buybacks</td>
+                    <td><input type="text" id="buybacks"></td><td id="buybacksPoints">0</td>
                 </tr>
 
-                <tr class="category-header"><td colspan="3">6. Dividendai (Max: 4 balai)</td></tr>
+                <!-- DIVIDENDS -->
+                <tr class="category-header"><td colspan="4">Dividends (Max: 4)</td></tr>
                 <tr>
-                    <td>Dividendų pelningumas (palyginti su pramonės vidurkiu)</td>
-                    <td><input type="text" class="data-input" data-value="Dividend Yield" placeholder="pvz., 'Virš'"></td>
-                    <td class="points">0</td>
+                    <td>Dividends</td><td>Dividend Yield vs Industry</td>
+                    <td><input type="text" id="dy"></td><td id="dyPoints">0</td>
                 </tr>
                 <tr>
-                    <td>Išmokėjimo santykis</td>
-                    <td><input type="number" step="0.01" class="data-input" data-value="Payout Ratio" placeholder="pvz., 55"> %</td>
-                    <td class="points">0</td>
+                    <td>Dividends</td><td>Payout Ratio (%)</td>
+                    <td><input type="number" id="pr"></td><td id="prPoints">0</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2" style="text-align: right;">Bendra suma:</td>
-                    <td id="totalScore">0</td>
+                    <td colspan="3"><strong>Total Score</strong></td>
+                    <td id="totalPoints">0</td>
                 </tr>
-                <tr class="final-rating-row">
-                    <td colspan="2" style="text-align: right;">Galutinis įvertinimas:</td>
-                    <td id="finalRating">...</td>
+                <tr>
+                    <td colspan="4" id="ratingText"></td>
                 </tr>
             </tfoot>
         </table>
-        <div class="button-container">
-            <button id="calculateButton">Apskaičiuoti balus</button>
-        </div>
-    </div>
+        <button type="button" onclick="calculate()">Calculate Score</button>
+        
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Total Score</strong></td>
+                <td id="totalPoints">0</td>
+            </tr>
+            <tr>
+                <td colspan="4" id="ratingText"></td>
+            </tr>
+        </tfoot>
+    </table>
+    <button type="button" id="calculateButton">Calculate Score</button>
+</form>
 
-    <script src="script.js"></script>
+    <script src="brain.js"></script>
 </body>
 </html>

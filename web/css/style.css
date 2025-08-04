@@ -1,109 +1,57 @@
 body {
-    font-family: sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 800px;
-    background: white;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    color: #333;
 }
 
 h1 {
     text-align: center;
-    color: #333;
-}
-
-.input-section {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-#companyName {
-    width: 70%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    color: #005288;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-input[type="text"] {
-    width: 90%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-tfoot td {
-    font-weight: bold;
-    background-color: #f2f2f2;
-    text-align: right;
-}
-
-tfoot #totalScore {
-    text-align: center;
-}
-
-.category-header td {
-    background-color: #e0e0e0 !important;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-}
-
-.category-header td {
-    background-color: #e0e0e0 !important;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-}
-
-.button-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-#calculateButton {
-    padding: 10px 20px;
-    font-size: 16px;
+    background-color: #005288;
     color: white;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-#calculateButton:hover {
-    background-color: #0056b3;
+.category-header {
+    background-color: #e0ecf8;
+    font-weight: bold;
+    text-align: center;
+}
+
+button {
+    background-color: #005288;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #003e66;
+}
+
+#ratingText {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
 }
