@@ -10,6 +10,34 @@ h1 {
     color: #005288;
 }
 
+.main-layout {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.score-section {
+    max-width: 600px;
+    width: 100%;
+}
+
+.input-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-section label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.input-section input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -42,7 +70,7 @@ button {
     cursor: pointer;
     font-weight: bold;
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0;
 }
 
 button:hover {
@@ -54,4 +82,37 @@ button:hover {
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
+}
+
+/* History Table Styles */
+#history-container {
+    width: 350px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+#history-container h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #005288;
+}
+
+#history-table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+#history-table th, #history-table td {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+#history-table thead th {
+    background-color: #f0f0f0;
+    color: #333;
 }
