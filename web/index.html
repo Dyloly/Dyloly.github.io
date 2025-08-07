@@ -12,7 +12,7 @@
         <div class="score-section">
             <div class="input-section">
                 <label for="company-name-input">Company Name:</label>
-                <input type="text" id="company-name-input" placeholder="e.g., Apple Inc.">
+                <input type="text" id="company-name-input" placeholder="e.g., Meta Inc.">
             </div>
             
             <form id="scoreForm">
@@ -24,89 +24,89 @@
                         <tr class="category-header"><td colspan="4">Profitability (Max: 10)</td></tr>
                         <tr>
                             <td>Profitability</td><td>ROE (%)</td>
-                            <td><input type="number" id="roe"></td><td id="roePoints">0</td>
+                            <td><input type="number" id="roe" placeholder="e.g., 15"></td><td id="roePoints">0</td>
                         </tr>
                         <tr>
                             <td>Profitability</td><td>ROIC (%)</td>
-                            <td><input type="number" id="roic"></td><td id="roicPoints">0</td>
+                            <td><input type="number" id="roic" placeholder="e.g., 12"></td><td id="roicPoints">0</td>
                         </tr>
                         <tr>
                             <td>Profitability</td><td>Net Profit Margin</td>
-                            <td><input type="text" id="npm"></td><td id="npmPoints">0</td>
+                            <td><input type="text" id="npm" placeholder="'above'/'equal'"></td><td id="npmPoints">0</td>
                         </tr>
                         <tr>
                             <td>Profitability</td><td>Operating Margin Trend</td>
-                            <td><input type="text" id="omt"></td><td id="omtPoints">0</td>
+                            <td><input type="text" id="omt" placeholder="'increasing'/'stable'"></td><td id="omtPoints">0</td>
                         </tr>
-    
+
                         <tr class="category-header"><td colspan="4">Valuation (Max: 10)</td></tr>
                         <tr>
                             <td>Valuation</td><td>P/E vs Industry</td>
-                            <td><input type="text" id="pe"></td><td id="pePoints">0</td>
+                            <td><input type="text" id="pe" placeholder="'below'/'equal'"></td><td id="pePoints">0</td>
                         </tr>
                         <tr>
                             <td>Valuation</td><td>P/B Ratio</td>
-                            <td><input type="number" id="pb"></td><td id="pbPoints">0</td>
+                            <td><input type="number" id="pb" placeholder="e.g., 1.2"></td><td id="pbPoints">0</td>
                         </tr>
                         <tr>
                             <td>Valuation</td><td>EV/EBITDA vs Industry</td>
-                            <td><input type="text" id="ev"></td><td id="evPoints">0</td>
+                            <td><input type="text" id="ev" placeholder="'below'/'equal'"></td><td id="evPoints">0</td>
                         </tr>
                         <tr>
                             <td>Valuation</td><td>Free Cash Flow Yield (%)</td>
-                            <td><input type="number" id="fcfy"></td><td id="fcfyPoints">0</td>
+                            <td><input type="number" id="fcfy" placeholder="e.g., 5"></td><td id="fcfyPoints">0</td>
                         </tr>
-    
+
                         <tr class="category-header"><td colspan="4">Financial Health (Max: 8)</td></tr>
                         <tr>
                             <td>Financial</td><td>D/E Ratio</td>
-                            <td><input type="number" id="de"></td><td id="dePoints">0</td>
+                            <td><input type="number" id="de" placeholder="e.g., 0.4"></td><td id="dePoints">0</td>
                         </tr>
                         <tr>
                             <td>Financial</td><td>Current Ratio</td>
-                            <td><input type="number" id="cr"></td><td id="crPoints">0</td>
+                            <td><input type="number" id="cr" placeholder="e.g., 2"></td><td id="crPoints">0</td>
                         </tr>
                         <tr>
                             <td>Financial</td><td>Interest Coverage</td>
-                            <td><input type="number" id="icr"></td><td id="icrPoints">0</td>
+                            <td><input type="number" id="icr" placeholder="e.g., 8"></td><td id="icrPoints">0</td>
                         </tr>
-    
+
                         <tr class="category-header"><td colspan="4">Growth (Max: 6)</td></tr>
                         <tr>
                             <td>Growth</td><td>Revenue Growth (%)</td>
-                            <td><input type="number" id="rev"></td><td id="revPoints">0</td>
+                            <td><input type="number" id="rev" placeholder="e.g., 10"></td><td id="revPoints">0</td>
                         </tr>
                         <tr>
                             <td>Growth</td><td>EPS Growth (%)</td>
-                            <td><input type="number" id="eps"></td><td id="epsPoints">0</td>
+                            <td><input type="number" id="eps" placeholder="e.g., 12"></td><td id="epsPoints">0</td>
                         </tr>
                         <tr>
                             <td>Growth</td><td>FCF Growth</td>
-                            <td><input type="text" id="fcfg"></td><td id="fcfgPoints">0</td>
+                            <td><input type="text" id="fcfg" placeholder="'positive'/'negative'"></td><td id="fcfgPoints">0</td>
                         </tr>
-    
+
                         <tr class="category-header"><td colspan="4">Efficiency & Management (Max: 6)</td></tr>
                         <tr>
                             <td>Efficiency</td><td>Asset Turnover vs Industry</td>
-                            <td><input type="text" id="ato"></td><td id="atoPoints">0</td>
+                            <td><input type="text" id="ato" placeholder="'above'/'equal'"></td><td id="atoPoints">0</td>
                         </tr>
                         <tr>
                             <td>Efficiency</td><td>ROIC > WACC</td>
-                            <td><input type="text" id="rw"></td><td id="rwPoints">0</td>
+                            <td><input type="text" id="rw" placeholder="'yes'/'no'"></td><td id="rwPoints">0</td>
                         </tr>
                         <tr>
                             <td>Efficiency</td><td>Share Buybacks</td>
-                            <td><input type="text" id="buybacks"></td><td id="buybacksPoints">0</td>
+                            <td><input type="text" id="buybacks" placeholder="'consistent'/'inconsistent'"></td><td id="buybacksPoints">0</td>
                         </tr>
-    
+
                         <tr class="category-header"><td colspan="4">Dividends (Max: 4)</td></tr>
                         <tr>
                             <td>Dividends</td><td>Dividend Yield vs Industry</td>
-                            <td><input type="text" id="dy"></td><td id="dyPoints">0</td>
+                            <td><input type="text" id="dy" placeholder="'above'/'equal'"></td><td id="dyPoints">0</td>
                         </tr>
                         <tr>
                             <td>Dividends</td><td>Payout Ratio (%)</td>
-                            <td><input type="number" id="pr"></td><td id="prPoints">0</td>
+                            <td><input type="number" id="pr" placeholder="e.g., 50"></td><td id="prPoints">0</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -119,7 +119,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <button type="button" onclick="calculate()">Calculate Score</button>
+                <button type="button">Calculate Score</button>
             </form>
         </div>
 

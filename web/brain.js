@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     let history = [];
-    const MAX_HISTORY_ITEMS = 3;
+    const MAX_HISTORY_ITEMS = 10;
+
+    // 1. Įkeliame istoriją iš vietinės saugyklos, kai puslapis užkraunamas
+    function loadHistory() {
+        const storedHistory = sessionStorage.getItem('calculationHistory');
+        if (storedHistory) {
+            try {
+                history = JSON.parse(storedHistory);
+            } catch (e) {
+                console.error("Failed to parse history from localStorage", e);
+                history = [];
+            }
+        }
+        displayHistory();
+    }
 
     function updateRating(totalScore) {
         const ratingElement = document.getElementById('ratingText');
@@ -46,6 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             historyBody.appendChild(row);
         });
+    }
+
+    // 2. Išsaugome istoriją į vietinę saugyklą
+    function saveHistory() {
+        sessionStorage.setItem('calculationHistory', JSON.stringify(history));
     }
 
     window.calculate = function() {
@@ -99,10 +118,41 @@ document.addEventListener('DOMContentLoaded', function() {
             result: ratingText
         };
 
-        // Pridedame naują įrašą į istorijos masyvą ir atnaujiname lentelę
         history.push(newEntry);
-        displayHistory();
+        
+        // **NAUJAS KODAS**
+        // Patikriname, ar istorijos masyvas neviršija 10 įrašų
+        if (history.length > MAX_HISTORY_ITEMS) {
+            history.shift(); // Pašaliname seniausią įrašą (pirmąjį masyvo elementą)
+        }
+        
+        displayHistory(); // Atvaizduojame atnaujintą istoriją
+        saveHistory(); // Išsaugome atnaujintą istoriją vietinėje saugykloje
     };
+
+    // ... (likęs kodas)
+
+    function displayHistory() {
+        const historyBody = document.querySelector('#history-table tbody');
+        if (!historyBody) return;
+
+        historyBody.innerHTML = ''; // Išvalome visą esamą lentelės turinį
+
+        // Paimame naujausius įrašus ir atvaizduojame juos
+        // Ši dalis liko nepakitusi, nes jau naudojo MAX_HISTORY_ITEMS
+        const recentHistory = history.slice(-MAX_HISTORY_ITEMS);
+        
+        recentHistory.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.score}</td>
+                <td>${item.result}</td>
+            `;
+            historyBody.appendChild(row);
+        });
+    }
+
 
     function updateIndividualPoints() {
         const processScoreRealtime = (id, scoreFunction, type = 'number') => {
@@ -158,4 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateIndividualPoints();
     document.getElementById("totalPoints").textContent = 0;
     document.getElementById("ratingText").textContent = '';
+
+    // 3. Iškviečiame šią funkciją, kad būtų įkelta istorija paleidus puslapį
+    loadHistory();
 });

@@ -104,15 +104,19 @@ button:hover {
 #history-table {
     width: 100%;
     margin-bottom: 0;
+    table-layout: fixed; /* Šis nustatymas yra raktas */
 }
 
 #history-table th, #history-table td {
     padding: 6px 8px;
     font-size: 0.9rem;
     text-align: center;
+    white-space: nowrap; /* Šis nustatymas neleis tekstui persikelti į naują eilutę */
+    overflow: hidden; /* Paslėps tekstą, jei jis per ilgas */
+    text-overflow: ellipsis; /* Pridės "..." per ilgam tekstui */
 }
 
-#history-table thead th {
+#history-table th {
     background-color: #f0f0f0;
     color: #333;
 }
