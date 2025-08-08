@@ -20,7 +20,7 @@
                     <thead>
                         <tr><th>Category</th><th>Indicator</th><th>Input</th><th>Points</th></tr>
                     </thead>
-                    <tbody>
+                  <tbody>
                         <tr class="category-header"><td colspan="4">Profitability (Max: 10)</td></tr>
                         <tr>
                             <td>Profitability</td><td>ROE (%)</td>
@@ -32,17 +32,41 @@
                         </tr>
                         <tr>
                             <td>Profitability</td><td>Net Profit Margin</td>
-                            <td><input type="text" id="npm" placeholder="'above'/'equal'"></td><td id="npmPoints">0</td>
+                            <td>
+                                <select id="npm">
+                                    <option value="">Select an option</option>
+                                    <option value="above">Above</option>
+                                    <option value="equal">Equal</option>
+                                    <option value="below">Below</option>
+                                </select>
+                            </td>
+                            <td id="npmPoints">0</td>
                         </tr>
                         <tr>
                             <td>Profitability</td><td>Operating Margin Trend</td>
-                            <td><input type="text" id="omt" placeholder="'increasing'/'stable'"></td><td id="omtPoints">0</td>
+                            <td>
+                                <select id="omt">
+                                    <option value="">Select an option</option>
+                                    <option value="increasing">Increasing</option>
+                                    <option value="stable">Stable</option>
+                                    <option value="decreasing">Decreasing</option>
+                                </select>
+                            </td>
+                            <td id="omtPoints">0</td>
                         </tr>
-
+                        
                         <tr class="category-header"><td colspan="4">Valuation (Max: 10)</td></tr>
                         <tr>
                             <td>Valuation</td><td>P/E vs Industry</td>
-                            <td><input type="text" id="pe" placeholder="'below'/'equal'"></td><td id="pePoints">0</td>
+                            <td>
+                                <select id="pe">
+                                    <option value="">Select an option</option>
+                                    <option value="below">Below</option>
+                                    <option value="equal">Equal</option>
+                                    <option value="above">Above</option>
+                                </select>
+                            </td>
+                            <td id="pePoints">0</td>
                         </tr>
                         <tr>
                             <td>Valuation</td><td>P/B Ratio</td>
@@ -50,13 +74,21 @@
                         </tr>
                         <tr>
                             <td>Valuation</td><td>EV/EBITDA vs Industry</td>
-                            <td><input type="text" id="ev" placeholder="'below'/'equal'"></td><td id="evPoints">0</td>
+                            <td>
+                                <select id="ev">
+                                    <option value="">Select an option</option>
+                                    <option value="below">Below</option>
+                                    <option value="equal">Equal</option>
+                                    <option value="above">Above</option>
+                                </select>
+                            </td>
+                            <td id="evPoints">0</td>
                         </tr>
                         <tr>
                             <td>Valuation</td><td>Free Cash Flow Yield (%)</td>
                             <td><input type="number" id="fcfy" placeholder="e.g., 5"></td><td id="fcfyPoints">0</td>
                         </tr>
-
+                        
                         <tr class="category-header"><td colspan="4">Financial Health (Max: 8)</td></tr>
                         <tr>
                             <td>Financial</td><td>D/E Ratio</td>
@@ -70,7 +102,7 @@
                             <td>Financial</td><td>Interest Coverage</td>
                             <td><input type="number" id="icr" placeholder="e.g., 8"></td><td id="icrPoints">0</td>
                         </tr>
-
+                        
                         <tr class="category-header"><td colspan="4">Growth (Max: 6)</td></tr>
                         <tr>
                             <td>Growth</td><td>Revenue Growth (%)</td>
@@ -82,27 +114,64 @@
                         </tr>
                         <tr>
                             <td>Growth</td><td>FCF Growth</td>
-                            <td><input type="text" id="fcfg" placeholder="'positive'/'negative'"></td><td id="fcfgPoints">0</td>
+                            <td>
+                                <select id="fcfg">
+                                    <option value="">Select an option</option>
+                                    <option value="positive">Positive</option>
+                                    <option value="negative">Negative</option>
+                                </select>
+                            </td>
+                            <td id="fcfgPoints">0</td>
                         </tr>
-
+                        
                         <tr class="category-header"><td colspan="4">Efficiency & Management (Max: 6)</td></tr>
                         <tr>
                             <td>Efficiency</td><td>Asset Turnover vs Industry</td>
-                            <td><input type="text" id="ato" placeholder="'above'/'equal'"></td><td id="atoPoints">0</td>
+                            <td>
+                                <select id="ato">
+                                    <option value="">Select an option</option>
+                                    <option value="above">Above</option>
+                                    <option value="equal">Equal</option>
+                                    <option value="below">Below</option>
+                                </select>
+                            </td>
+                            <td id="atoPoints">0</td>
                         </tr>
                         <tr>
                             <td>Efficiency</td><td>ROIC > WACC</td>
-                            <td><input type="text" id="rw" placeholder="'yes'/'no'"></td><td id="rwPoints">0</td>
+                            <td>
+                                <select id="rw">
+                                    <option value="">Select an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </td>
+                            <td id="rwPoints">0</td>
                         </tr>
                         <tr>
                             <td>Efficiency</td><td>Share Buybacks</td>
-                            <td><input type="text" id="buybacks" placeholder="'consistent'/'inconsistent'"></td><td id="buybacksPoints">0</td>
+                            <td>
+                                <select id="buybacks">
+                                    <option value="">Select an option</option>
+                                    <option value="consistent">Consistent</option>
+                                    <option value="inconsistent">Inconsistent</option>
+                                </select>
+                            </td>
+                            <td id="buybacksPoints">0</td>
                         </tr>
-
+                        
                         <tr class="category-header"><td colspan="4">Dividends (Max: 4)</td></tr>
                         <tr>
                             <td>Dividends</td><td>Dividend Yield vs Industry</td>
-                            <td><input type="text" id="dy" placeholder="'above'/'equal'"></td><td id="dyPoints">0</td>
+                            <td>
+                                <select id="dy">
+                                    <option value="">Select an option</option>
+                                    <option value="above">Above</option>
+                                    <option value="equal">Equal</option>
+                                    <option value="below">Below</option>
+                                </select>
+                            </td>
+                            <td id="dyPoints">0</td>
                         </tr>
                         <tr>
                             <td>Dividends</td><td>Payout Ratio (%)</td>

@@ -2,20 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     let history = [];
     const MAX_HISTORY_ITEMS = 10;
 
-    // 1. Įkeliame istoriją iš vietinės saugyklos, kai puslapis užkraunamas
+    // Funkcija, kuri įkelia istoriją iš sesijos saugyklos (sessionStorage)
     function loadHistory() {
         const storedHistory = sessionStorage.getItem('calculationHistory');
         if (storedHistory) {
             try {
                 history = JSON.parse(storedHistory);
             } catch (e) {
-                console.error("Failed to parse history from localStorage", e);
+                console.error("Failed to parse history from sessionStorage", e);
                 history = [];
             }
         }
         displayHistory();
     }
 
+    // Funkcija, kuri atnaujina įvertinimo tekstą ir spalvą
     function updateRating(totalScore) {
         const ratingElement = document.getElementById('ratingText');
         if (!ratingElement) return '';
@@ -42,13 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
         return ratingText;
     }
 
+    // Funkcija, kuri atvaizduoja istoriją lentelėje
     function displayHistory() {
         const historyBody = document.querySelector('#history-table tbody');
         if (!historyBody) return;
 
-        historyBody.innerHTML = ''; // Išvalome visą esamą lentelės turinį
+        historyBody.innerHTML = '';
 
-        // Paimame naujausius įrašus ir atvaizduojame juos
         const recentHistory = history.slice(-MAX_HISTORY_ITEMS);
         
         recentHistory.forEach(item => {
@@ -62,11 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. Išsaugome istoriją į vietinę saugyklą
+    // Funkcija, kuri išsaugo istoriją į sesijos saugyklą
     function saveHistory() {
         sessionStorage.setItem('calculationHistory', JSON.stringify(history));
     }
 
+    // Pagrindinė skaičiavimo funkcija, kuri iškviečiama paspaudus mygtuką
     window.calculate = function() {
         let total = 0;
 
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'number') {
                 value = parseFloat(inputElement.value);
                 if (isNaN(value)) return 0;
-            } else {
+            } else { // Ši dalis dabar apdoroja ir 'input' tipo 'text' laukelius, ir 'select' laukelius
                 value = inputElement.value.trim().toLowerCase();
                 if (value === "") return 0;
             }
@@ -120,40 +122,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         history.push(newEntry);
         
-        // **NAUJAS KODAS**
-        // Patikriname, ar istorijos masyvas neviršija 10 įrašų
         if (history.length > MAX_HISTORY_ITEMS) {
-            history.shift(); // Pašaliname seniausią įrašą (pirmąjį masyvo elementą)
+            history.shift();
         }
         
-        displayHistory(); // Atvaizduojame atnaujintą istoriją
-        saveHistory(); // Išsaugome atnaujintą istoriją vietinėje saugykloje
+        displayHistory();
+        saveHistory();
     };
 
-    // ... (likęs kodas)
-
-    function displayHistory() {
-        const historyBody = document.querySelector('#history-table tbody');
-        if (!historyBody) return;
-
-        historyBody.innerHTML = ''; // Išvalome visą esamą lentelės turinį
-
-        // Paimame naujausius įrašus ir atvaizduojame juos
-        // Ši dalis liko nepakitusi, nes jau naudojo MAX_HISTORY_ITEMS
-        const recentHistory = history.slice(-MAX_HISTORY_ITEMS);
-        
-        recentHistory.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.name}</td>
-                <td>${item.score}</td>
-                <td>${item.result}</td>
-            `;
-            historyBody.appendChild(row);
-        });
-    }
-
-
+    // Funkcija, kuri atnaujina individualius taškus realiuoju laiku
     function updateIndividualPoints() {
         const processScoreRealtime = (id, scoreFunction, type = 'number') => {
             const inputElement = document.getElementById(id);
@@ -194,21 +171,27 @@ document.addEventListener('DOMContentLoaded', function() {
         processScoreRealtime("pr", (val) => (val < 60 ? 2 : (val >= 60 && val <= 80 ? 1 : 0)));
     }
 
+    // Įvykių klausymasis 'input' ir 'select' elementams, atnaujinantis balus realiuoju laiku
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('input', updateIndividualPoints);
+    });
+    
+    const selects = document.querySelectorAll('select');
+    selects.forEach(select => {
+        select.addEventListener('change', updateIndividualPoints);
+    });
 
     const calculateButton = document.querySelector('#scoreForm button');
     if (calculateButton) {
         calculateButton.addEventListener('click', calculate);
     }
     
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-        input.addEventListener('input', updateIndividualPoints);
-    });
-
+    // Nustatymai, kurie paleidžiami įkėlus puslapį
     updateIndividualPoints();
     document.getElementById("totalPoints").textContent = 0;
     document.getElementById("ratingText").textContent = '';
 
-    // 3. Iškviečiame šią funkciją, kad būtų įkelta istorija paleidus puslapį
+    // Įkeliame istoriją iš sesijos saugyklos
     loadHistory();
 });
