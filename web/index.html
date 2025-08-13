@@ -2,211 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Investment Scoring Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamental Analysis Made Easy</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Investment Scoring Tool</h1>
+    <header class="navbar">
+        <div class="logo">FUNDAMENTALISTA</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li class="signup-btn"><a href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="main-layout">
-        <div class="score-section">
-            <div class="input-section">
-                <label for="company-name-input">Company Name:</label>
-                <input type="text" id="company-name-input" placeholder="e.g., Meta Inc.">
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Fundamental<br>Analysis<br>Made Easy</h1>
+                <p>Evaluate stocks with our sector-relative fundamental scoring model.</p>
+                <a href="#" class="btn btn-primary">Get Started</a>
             </div>
-            
-            <form id="scoreForm">
-                <table>
-                    <thead>
-                        <tr><th>Category</th><th>Indicator</th><th>Input</th><th>Points</th></tr>
-                    </thead>
-                  <tbody>
-                        <tr class="category-header"><td colspan="4">Profitability (Max: 10)</td></tr>
-                        <tr>
-                            <td>Profitability</td><td>ROE (%)</td>
-                            <td><input type="number" id="roe" placeholder="e.g., 15"></td><td id="roePoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Profitability</td><td>ROIC (%)</td>
-                            <td><input type="number" id="roic" placeholder="e.g., 12"></td><td id="roicPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Profitability</td><td>Net Profit Margin</td>
-                            <td>
-                                <select id="npm">
-                                    <option value="">Select an option</option>
-                                    <option value="above">Above</option>
-                                    <option value="equal">Equal</option>
-                                    <option value="below">Below</option>
-                                </select>
-                            </td>
-                            <td id="npmPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Profitability</td><td>Operating Margin Trend</td>
-                            <td>
-                                <select id="omt">
-                                    <option value="">Select an option</option>
-                                    <option value="increasing">Increasing</option>
-                                    <option value="stable">Stable</option>
-                                    <option value="decreasing">Decreasing</option>
-                                </select>
-                            </td>
-                            <td id="omtPoints">0</td>
-                        </tr>
-                        
-                        <tr class="category-header"><td colspan="4">Valuation (Max: 10)</td></tr>
-                        <tr>
-                            <td>Valuation</td><td>P/E vs Industry</td>
-                            <td>
-                                <select id="pe">
-                                    <option value="">Select an option</option>
-                                    <option value="below">Below</option>
-                                    <option value="equal">Equal</option>
-                                    <option value="above">Above</option>
-                                </select>
-                            </td>
-                            <td id="pePoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Valuation</td><td>P/B Ratio</td>
-                            <td><input type="number" id="pb" placeholder="e.g., 1.2"></td><td id="pbPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Valuation</td><td>EV/EBITDA vs Industry</td>
-                            <td>
-                                <select id="ev">
-                                    <option value="">Select an option</option>
-                                    <option value="below">Below</option>
-                                    <option value="equal">Equal</option>
-                                    <option value="above">Above</option>
-                                </select>
-                            </td>
-                            <td id="evPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Valuation</td><td>Free Cash Flow Yield (%)</td>
-                            <td><input type="number" id="fcfy" placeholder="e.g., 5"></td><td id="fcfyPoints">0</td>
-                        </tr>
-                        
-                        <tr class="category-header"><td colspan="4">Financial Health (Max: 8)</td></tr>
-                        <tr>
-                            <td>Financial</td><td>D/E Ratio</td>
-                            <td><input type="number" id="de" placeholder="e.g., 0.4"></td><td id="dePoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Financial</td><td>Current Ratio</td>
-                            <td><input type="number" id="cr" placeholder="e.g., 2"></td><td id="crPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Financial</td><td>Interest Coverage</td>
-                            <td><input type="number" id="icr" placeholder="e.g., 8"></td><td id="icrPoints">0</td>
-                        </tr>
-                        
-                        <tr class="category-header"><td colspan="4">Growth (Max: 6)</td></tr>
-                        <tr>
-                            <td>Growth</td><td>Revenue Growth (%)</td>
-                            <td><input type="number" id="rev" placeholder="e.g., 10"></td><td id="revPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Growth</td><td>EPS Growth (%)</td>
-                            <td><input type="number" id="eps" placeholder="e.g., 12"></td><td id="epsPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Growth</td><td>FCF Growth</td>
-                            <td>
-                                <select id="fcfg">
-                                    <option value="">Select an option</option>
-                                    <option value="positive">Positive</option>
-                                    <option value="negative">Negative</option>
-                                </select>
-                            </td>
-                            <td id="fcfgPoints">0</td>
-                        </tr>
-                        
-                        <tr class="category-header"><td colspan="4">Efficiency & Management (Max: 6)</td></tr>
-                        <tr>
-                            <td>Efficiency</td><td>Asset Turnover vs Industry</td>
-                            <td>
-                                <select id="ato">
-                                    <option value="">Select an option</option>
-                                    <option value="above">Above</option>
-                                    <option value="equal">Equal</option>
-                                    <option value="below">Below</option>
-                                </select>
-                            </td>
-                            <td id="atoPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Efficiency</td><td>ROIC > WACC</td>
-                            <td>
-                                <select id="rw">
-                                    <option value="">Select an option</option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </td>
-                            <td id="rwPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Efficiency</td><td>Share Buybacks</td>
-                            <td>
-                                <select id="buybacks">
-                                    <option value="">Select an option</option>
-                                    <option value="consistent">Consistent</option>
-                                    <option value="inconsistent">Inconsistent</option>
-                                </select>
-                            </td>
-                            <td id="buybacksPoints">0</td>
-                        </tr>
-                        
-                        <tr class="category-header"><td colspan="4">Dividends (Max: 4)</td></tr>
-                        <tr>
-                            <td>Dividends</td><td>Dividend Yield vs Industry</td>
-                            <td>
-                                <select id="dy">
-                                    <option value="">Select an option</option>
-                                    <option value="above">Above</option>
-                                    <option value="equal">Equal</option>
-                                    <option value="below">Below</option>
-                                </select>
-                            </td>
-                            <td id="dyPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td>Dividends</td><td>Payout Ratio (%)</td>
-                            <td><input type="number" id="pr" placeholder="e.g., 50"></td><td id="prPoints">0</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3"><strong>Total Score</strong></td>
-                            <td id="totalPoints">0</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" id="ratingText"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <button type="button">Calculate Score</button>
-            </form>
-        </div>
+            <div class="hero-image">
+                <img src="img/raw.png" alt="Calculator illustration">
+            </div>
+        </section>
 
-        <aside id="history-container">
-            <h2>Calculation History</h2>
-            <table id="history-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Score</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    </tbody>
-            </table>
-        </aside>
-    </div>
+        <section class="features-section">
+            <div class="feature-card">
+                <h3>Calculate SRFSM Score</h3>
+                <p>Enter financial data to generate the sector-relative fundamental scoring model (SRFSM)</p>
+                <a href="calculator.html" class="btn btn-secondary">Calculate →</a>
+            </div>
+            <div class="feature-card">
+                <h3>AI-Powered Assistant</h3>
+                <p>Let our AI assistant help you discover top-scoring stocks based on the SRFSM model.</p>
+                <a href="#" class="btn btn-secondary">Get Started →</a>
+            </div>
+        </section>
+    </main>
 
     <script src="brain.js"></script>
 </body>
