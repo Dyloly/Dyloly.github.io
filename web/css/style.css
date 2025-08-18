@@ -1,45 +1,73 @@
+/* ---- 1. Spalvos ir Šriftai ---- */
 :root {
-    --primary-color: #2b3a55;
-    --secondary-color: #f6c026;
-    --background-color: #1a2233;
-    --card-background: #2b3a55;
-    --card-text: #fff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    /* Spalvos */
+    --primary-bg: #131722;
+    --secondary-bg: #1E222D;
+    --primary-accent: #2962FF;
+    --secondary-accent: #26A69A;
+    --text-main: #E0E0E0;
+    --text-secondary: #B0BEC5;
+    --success-color: #00C853;
+    --warning-color: #FFAB00;
+    --danger-color: #D50000;
+
+    /* Šriftai */
+    --font-inter: 'Inter', sans-serif;
+    --font-body-size: 18px;
+    --font-small-size: 14px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: var(--card-text);
-    background-color: var(--background-color);
+    font-family: var(--font-inter);
+    background-color: var(--primary-bg);
+    color: var(--text-main);
+    overflow-x: hidden; /* Sunaikina horizontalią slinkties juostą */
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
+    color: #fff;
 }
 
-/* Header & Navigation */
+h1 { font-size: 48px; }
+h2 { font-size: 36px; }
+h3 { font-size: 28px; font-weight: 600; }
+p { font-size: var(--font-body-size); color: var(--text-secondary); }
+small { font-size: var(--font-small-size); }
+
+/* ---- 2. Išdėstymas ---- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Bendri stiliai navigacijai ir hero sekcijai */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
-    background-color: transparent;
+    padding: 1.5rem 20px;
     position: absolute;
-    width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box; /* Užtikrina, kad padding'as nepridėtų pločio */
+    z-index: 100;
 }
 
-.navbar .logo {
+.logo {
     font-size: 1.5rem;
     font-weight: 700;
     color: #fff;
 }
 
-.navbar nav ul {
+nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -47,148 +75,111 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-.navbar nav ul li {
+nav ul li {
     margin-left: 2rem;
 }
 
-.navbar nav ul li a {
+nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: var(--text-main);
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
-.navbar nav ul li a:hover {
-    color: var(--secondary-color);
+nav ul li a:hover {
+    color: var(--primary-accent);
 }
 
-.signup-btn a {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-weight: 700;
+.hero-section {
+    background-color: var(--primary-bg);
+    padding: 120px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
 }
 
-/* Bendri mygtukų stiliai */
+.hero-content {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ---- 3. Mygtukai ---- */
 .btn {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    padding: 14px 28px;
+    border-radius: 6px;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 18px;
     text-align: center;
     transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    border: none;
+    background-color: var(--primary-accent);
+    color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #d1a11e;
+    background-color: #3D73FF;
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--primary-accent);
+    border: 2px solid var(--primary-accent);
 }
 
 .btn-secondary:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-accent);
     color: #fff;
 }
 
-/* Pagrindinio puslapio stiliai */
-.hero-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8rem 5% 4rem;
-    background-color: var(--primary-color);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-content {
-    max-width: 50%;
-    z-index: 1;
-}
-
-.hero-content h1 {
-    font-size: 4rem;
-    margin: 0 0 1rem;
-    line-height: 1.1;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: #ccc;
-    max-width: 450px;
-}
-
-.hero-image {
-    max-width: 45%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Funkcijų kortelių stiliai */
+/* ---- 4. Kortelės ---- */
 .features-section {
+    background-color: var(--primary-bg);
+    padding: 4rem 20px;
     display: flex;
     justify-content: center;
     gap: 2rem;
-    padding: 4rem 5%;
-    background-color: var(--background-color);
-    margin-top: -3rem;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
 }
 
 .feature-card {
-    background-color: var(--card-background);
-    color: var(--card-text);
+    background-color: var(--secondary-bg);
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    max-width: 450px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .feature-card h3 {
-    font-size: 1.5rem;
-    margin-top: 0;
     color: #fff;
 }
 
 .feature-card p {
-    font-size: 1rem;
-    color: #ccc;
+    color: var(--text-secondary);
 }
 
-.feature-card .btn-secondary {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    text-decoration: none;
-}
-
-.feature-card .btn-secondary:hover {
-    background-color: var(--secondary-color);
-    color: var(--card-background);
-}
-
-/* Skaičiuoklės puslapio stiliai */
+/* ---- 5. Skaičiuoklės Stiliai ---- */
 .calculator-main {
-    padding-top: 8rem;
+    background-color: var(--primary-bg);
+    padding-top: 100px;
     min-height: 100vh;
 }
 
@@ -197,21 +188,17 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    padding: 4rem 5%;
-    background-color: var(--background-color);
+    padding: 4rem 20px;
 }
 
 .score-section, #history-container {
-    background-color: var(--card-background);
+    background-color: var(--secondary-bg);
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.score-section {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     flex: 2;
     min-width: 600px;
+    box-sizing: border-box;
 }
 
 #history-container {
@@ -219,6 +206,7 @@ h1, h2, h3, h4, h5, h6 {
     min-width: 300px;
 }
 
+/* Lentelės stiliai */
 #scoreForm table {
     width: 100%;
     border-collapse: collapse;
@@ -232,8 +220,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #scoreForm th {
-    background-color: #3b4c68;
+    background-color: #1a1e28;
     color: #fff;
+}
+
+#scoreForm tr:hover {
+    background-color: #242b38;
 }
 
 #scoreForm input, #scoreForm select {
@@ -247,26 +239,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-header td {
-    background-color: #2d3b50;
+    background-color: #1a1e28;
     font-weight: bold;
-    color: var(--secondary-color);
-    border-bottom: 2px solid var(--secondary-color);
-}
-
-#scoreForm button {
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    border: none;
-    border-radius: 4px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#scoreForm button:hover {
-    background-color: #d1a11e;
+    color: var(--secondary-accent);
+    border-bottom: 2px solid var(--secondary-accent);
 }
 
 #history-table {
@@ -282,40 +258,57 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #history-table th {
-    background-color: #3b4c68;
+    background-color: #1a1e28;
     color: #fff;
 }
 
-/* Medijos užklausos */
+/* ---- 6. Reagavimas (Responsive) ---- */
 @media (max-width: 992px) {
     .hero-section {
         flex-direction: column;
         text-align: center;
         padding-top: 6rem;
     }
-
-    .hero-content {
+    .hero-content, .hero-image {
         max-width: 100%;
+        flex: auto; /* Leidžia elementams užimti visą plotį */
     }
-
-    .hero-image {
-        max-width: 80%;
-    }
-
     .features-section {
         flex-direction: column;
         margin-top: 2rem;
     }
-
     .feature-card {
         margin-bottom: 1rem;
     }
-
     .score-tool-section {
         flex-direction: column;
     }
-
     .score-section, #history-container {
-        min-width: 100%;
+        min-width: auto; /* Pakeičia minimalų plotį į automatinį */
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 24px; }
+    p { font-size: 16px; }
+    .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    .navbar nav ul {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar nav ul li {
+        margin: 0.5rem 0;
     }
 }
