@@ -1,20 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     let history = [];
     const MAX_HISTORY_ITEMS = 10;
-    
-    // Pagrindinio puslapio mygtuko funkcionalumas
-    const calculateLink = document.querySelector('.feature-card .btn-secondary');
-    if (calculateLink) {
-        calculateLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = 'calculator.html';
-        });
-    }
 
-    // Skaičiuoklės funkcionalumas, kuris veikia TIK skaičiuoklės puslapyje
     const scoreForm = document.getElementById('scoreForm');
     if (scoreForm) {
-        // Funkcija, kuri atnaujina įvertinimo tekstą ir spalvą
         function updateRating(totalScore) {
             const ratingElement = document.getElementById('ratingText');
             if (!ratingElement) return '';
@@ -41,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return ratingText;
         }
 
-        // Funkcija, kuri atvaizduoja istoriją lentelėje
         function displayHistory() {
             const historyBody = document.querySelector('#history-table tbody');
             if (!historyBody) return;
@@ -61,26 +49,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Pagrindinė skaičiavimo funkcija, kuri iškviečiama paspaudus mygtuką
+        const getScore = (id, scoreFunction, type = 'number') => {
+            const inputElement = document.getElementById(id);
+            if (!inputElement) return 0;
+            let value;
+            if (type === 'number') {
+                value = parseFloat(inputElement.value);
+                if (isNaN(value)) return 0;
+            } else {
+                value = inputElement.value.trim().toLowerCase();
+                if (value === "") return 0;
+            }
+            return scoreFunction(value);
+        };
+
         window.calculate = function() {
             let total = 0;
-
-            const getScore = (id, scoreFunction, type = 'number') => {
-                const inputElement = document.getElementById(id);
-                if (!inputElement) return 0;
-
-                let value;
-                if (type === 'number') {
-                    value = parseFloat(inputElement.value);
-                    if (isNaN(value)) return 0;
-                } else {
-                    value = inputElement.value.trim().toLowerCase();
-                    if (value === "") return 0;
-                }
-
-                return scoreFunction(value);
-            };
-
             total += getScore("roe", (val) => (val >= 15 ? 2 : (val >= 10 ? 1 : 0)));
             total += getScore("roic", (val) => (val >= 12 ? 2 : (val >= 8 ? 1 : 0)));
             total += getScore("npm", (val) => (val.includes("above") ? 2 : (val.includes("equal") ? 1 : 0)), 'text');
@@ -100,35 +84,23 @@ document.addEventListener('DOMContentLoaded', function() {
             total += getScore("buybacks", (val) => (val.includes("consistent") ? 2 : 0), 'text');
             total += getScore("dy", (val) => (val.includes("above") ? 2 : (val.includes("equal") ? 1 : 0)), 'text');
             total += getScore("pr", (val) => (val < 60 ? 2 : (val >= 60 && val <= 80 ? 1 : 0)));
-
             document.getElementById("totalPoints").textContent = total;
             const ratingText = updateRating(total);
-
             const companyNameInput = document.getElementById('company-name-input');
             const companyName = companyNameInput ? companyNameInput.value || 'Unnamed Company' : 'Unnamed Company';
-            
-            const newEntry = {
-                name: companyName,
-                score: total,
-                result: ratingText
-            };
-
+            const newEntry = { name: companyName, score: total, result: ratingText };
             history.push(newEntry);
-            
             if (history.length > MAX_HISTORY_ITEMS) {
                 history.shift();
             }
-            
             displayHistory();
         };
 
-        // Funkcija, kuri atnaujina individualius taškus realiuoju laiku
         function updateIndividualPoints() {
             const processScoreRealtime = (id, scoreFunction, type = 'number') => {
                 const inputElement = document.getElementById(id);
                 const pointsElement = document.getElementById(id + "Points");
                 if (!inputElement || !pointsElement) return;
-
                 let value;
                 if (type === 'number') {
                     value = parseFloat(inputElement.value);
@@ -137,11 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     value = inputElement.value.trim().toLowerCase();
                     if (value === "") value = null;
                 }
-
                 const points = (value !== null) ? scoreFunction(value) : 0;
                 pointsElement.textContent = points;
             };
-
             processScoreRealtime("roe", (val) => (val >= 15 ? 2 : (val >= 10 ? 1 : 0)));
             processScoreRealtime("roic", (val) => (val >= 12 ? 2 : (val >= 8 ? 1 : 0)));
             processScoreRealtime("npm", (val) => (val.includes("above") ? 2 : (val.includes("equal") ? 1 : 0)), 'text');
@@ -163,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
             processScoreRealtime("pr", (val) => (val < 60 ? 2 : (val >= 60 && val <= 80 ? 1 : 0)));
         }
 
-        // Įvykių klausymasis 'input' ir 'select' elementams, atnaujinantis balus realiuoju laiku
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => {
             input.addEventListener('input', updateIndividualPoints);
@@ -179,11 +148,9 @@ document.addEventListener('DOMContentLoaded', function() {
             calculateButton.addEventListener('click', calculate);
         }
         
-        // Pradinės reikšmės skaičiuoklės puslapyje
         updateIndividualPoints();
         document.getElementById("totalPoints").textContent = 0;
         document.getElementById("ratingText").textContent = '';
-
         displayHistory();
     }
 });
