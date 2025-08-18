@@ -28,7 +28,7 @@ body {
     font-family: var(--font-inter);
     background-color: var(--primary-bg);
     color: var(--text-main);
-    overflow-x: hidden; /* Sunaikina horizontalią slinkties juostą */
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,7 +57,7 @@ small { font-size: var(--font-small-size); }
     padding: 1.5rem 20px;
     position: absolute;
     width: 100%;
-    box-sizing: border-box; /* Užtikrina, kad padding'as nepridėtų pločio */
+    box-sizing: border-box;
     z-index: 100;
 }
 
@@ -124,6 +124,10 @@ nav ul li a:hover {
     transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
+    /* Pridėtos taisyklės, kad veiktų visose naršyklėse */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .btn-primary {
@@ -271,7 +275,7 @@ nav ul li a:hover {
     }
     .hero-content, .hero-image {
         max-width: 100%;
-        flex: auto; /* Leidžia elementams užimti visą plotį */
+        flex: auto;
     }
     .features-section {
         flex-direction: column;
@@ -284,7 +288,7 @@ nav ul li a:hover {
         flex-direction: column;
     }
     .score-section, #history-container {
-        min-width: auto; /* Pakeičia minimalų plotį į automatinį */
+        min-width: auto;
         width: 100%;
     }
 }
