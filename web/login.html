@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Prisijungti</title>
+ <link rel="stylesheet" href="css/style.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+ <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js"></script>
+
+</head>
+<body class="login-page">
+
+ <main class="container">
+ <section class="login-section">
+ <h2>Prisijungti</h2>
+ <form id="loginForm">
+ <label for="login-email">El. paštas</label>
+ <input type="email" id="login-email" required>
+ 
+ <label for="login-password">Slaptažodis</label>
+ <input type="password" id="login-password" required>
+ 
+ <button type="submit" class="btn btn-primary">Prisijungti</button>
+ </form>
+ <p>Neturite paskyros? <a href="singup.html">Registruotis</a></p>
+ </section>
+ </main>
+ 
+ <script type="module" src="firebase.js"></script>
+ <script type="module" src="auth.js"></script>
+</body>
+</html>

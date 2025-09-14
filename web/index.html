@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,47 +7,51 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="navbar">
         <div class="logo">FUNDAMENTALISTA</div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li class="signup-btn"><a href="#">Sign Up</a></li>
+                <li><button class="btn btn-secondary" onclick="document.location='singup.html'">Sign Up</button></li>
+                <li><button class="btn btn-primary" onclick="document.location='login.html'">Login</button></li>
             </ul>
         </nav>
     </header>
-
+    
     <main>
         <section class="hero-section">
             <div class="hero-content">
-                <h1>Fundamental<br>Analysis<br>Made Easy</h1>
-                <p>Evaluate stocks with our sector-relative fundamental scoring model.</p>
-                <a href="#" class="btn btn-primary">Get Started</a>
+                <h1>Turn Complex Fundamentals into Simple Scores</h1>
+                <p>Stop guessing. SRFSM analyzes profitability, valuation, growth, and more — giving you one clear score to pick the best stocks in any sector.</p>
+                <a href="login.html" class="btn btn-primary">Get My Score</a>
             </div>
-            <div class="hero-image">
-                <img src="img/main pic.png" alt="Calculator illustration">
+            <div class="hero-image video-clip">
+                <img src="img/main pic.png" alt="Vaizdo klipo vieta">
             </div>
         </section>
 
         <section class="features-section">
             <div class="feature-card">
-                <h3>Calculate SRFSM Score</h3>
-                <p>Enter financial data to generate the sector-relative fundamental scoring model (SRFSM)</p>
-                <a href="calculator.html" class="btn btn-secondary">Calculate →</a>
+                <h3>Sector-Relative Insights</h3>
+                <p>See how a stock stacks up against its peers. No more looking at raw numbers — our scoring system normalizes fundamentals within each sector.</p>
             </div>
             <div class="feature-card">
                 <h3>AI-Powered Assistant</h3>
-                <p>Let our AI assistant help you discover top-scoring stocks based on the SRFSM model.</p>
-                <a href="#" class="btn btn-secondary">Get Started →</a>
+                <p>Meet Clipo — your investment sidekick. He guides you through metrics, explains scores in plain English, and even suggests top-rated stocks.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Simple, Transparent Scoring</h3>
+                <p>From complexity to clarity. All metrics (profitability, growth, valuation, etc.) combined into one clean SRFSM score out of 70.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Smarter Decisions, Faster</h3>
+                <p>Stop wasting hours on reports. Instantly screen, compare, and pick winners with confidence — backed by data, not guesswork.</p>
             </div>
         </section>
     </main>
-
+    
     <script src="main.js"></script>
 </body>
 </html>
