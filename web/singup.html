@@ -8,12 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 </head>
 <body class="registration-page">
+
+    <header class="navbar-small">
+        <a href="index.html" class="logo-small">Grįžti</a>
+    </header>
 
     <main class="container">
         <section class="registration-section">
@@ -21,17 +23,14 @@
             <form id="registrationForm">
                 <label for="reg-email">El. paštas</label>
                 <input type="email" id="reg-email" required>
-                
                 <label for="reg-password">Slaptažodis</label>
                 <input type="password" id="reg-password" required>
-                
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
             <p>Jau turite paskyrą? <a href="login.html">Prisijungti</a></p>
         </section>
     </main>
-    
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="auth.js"></script>
+    <script type="module" src="./firebase.js"></script>
+    <script type="module" src="./auth.js"></script>
 </body>
 </html>

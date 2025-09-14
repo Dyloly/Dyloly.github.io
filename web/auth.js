@@ -1,4 +1,6 @@
-import { auth } from 'firebase.js';
+// Importuojame reikalingas funkcijas iš Firebase
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { auth } from './firebase.js'; // Importuojame iš jūsų firebase.js failo
 
 const registrationForm = document.getElementById('registrationForm');
 const loginForm = document.getElementById('loginForm');
@@ -10,19 +12,17 @@ if (registrationForm) {
         const email = registrationForm['reg-email'].value;
         const password = registrationForm['reg-password'].value;
 
-        // Patikrinimas, ar slaptažodis ilgesnis nei 6 simboliai
         if (password.length < 6) {
             alert('Slaptažodis turi būti bent 6 simbolių ilgio.');
             return;
         }
 
-        auth.createUserWithEmailAndPassword(email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((cred) => {
-                // Vartotojas sėkmingai užsiregistravo
                 console.log('Vartotojas sėkmingai užsiregistravo:', cred.user);
-                alert('Jūsų paskyra sėkmingai sukurta! Galite prisijungti.');
+                alert('Jūsų paskyra sėkmingai sukurta! Jūs esate prisijungę.');
                 registrationForm.reset();
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             })
             .catch((err) => {
                 console.error('Registracijos klaida:', err.message);
@@ -38,13 +38,11 @@ if (loginForm) {
         const email = loginForm['login-email'].value;
         const password = loginForm['login-password'].value;
 
-        auth.signInWithEmailAndPassword(email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((cred) => {
-                // Vartotojas sėkmingai prisijungė
                 console.log('Vartotojas sėkmingai prisijungė:', cred.user);
-                alert('Prisijungimas sėkmingas!');
+                alert('Prisijungimas sėkmingas! Vykstama į paskyrą.');
                 loginForm.reset();
-                // Nukreipiame vartotoją į skaičiuoklės puslapį po prisijungimo
                 window.location.href = 'calculator.html'; 
             })
             .catch((err) => {
