@@ -124,10 +124,16 @@ nav ul li a:hover {
     transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
-    /* Pridėtos taisyklės, kad veiktų visose naršyklėse */
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    
+    /* Visiškas suderinamumas (vendor prefixes) */
+    -webkit-appearance: none; /* Safari, Chrome */
+    -moz-appearance: none;    /* Firefox */
     appearance: none;
+    
+    /* Perėjimas mygtuko spalvai (geresnis suderinamumas) */
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary {
@@ -152,61 +158,59 @@ nav ul li a:hover {
 
 /* ---- 4. Kortelės ---- */
 .features-section {
-    /* Išsaugota originali išdėstymo logika */
     background-color: var(--primary-bg);
     padding: 4rem 20px;
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between; /* NAUJAS: Užtikrina tolygų tarpų paskirstymą */
+    gap: 2rem; /* Išsaugota jau esanti taisyklė tarpams */
     margin-top: -60px;
     position: relative;
     z-index: 10;
 }
 
 .feature-card {
-    /* Baziniai stiliai */
-    padding: 30px; /* Padidintas padding iki 30px, kaip reikalaujama */
+    /* ... Baziniai stiliai ... */
+    padding: 30px; 
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    flex: 1;
-    text-align: left;
     overflow: hidden;
     position: relative; 
     border: none;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Pridėtas perėjimas lift efektui */
+    
+    /* PAKĖLIMO EFEKTO PERĖJIMAS (LIFT EFFECT TRANSITION) */
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    -o-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
     /* GRADIENTAS */
-    background: linear-gradient(
-        180deg, 
-        #2C2F38 0%,     /* Top: dark gray */
-        #3A3F47 40%,    /* Middle: steel gray */
-        #2962FF 100%    /* Bottom: brand blue accent */
-    );
+    background: -webkit-linear-gradient(180deg, #2C2F38 0%, #3A3F47 40%, #2962FF 100%); /* WebKit */
+    background: -moz-linear-gradient(180deg, #2C2F38 0%, #3A3F47 40%, #2962FF 100%);    /* Firefox */
+    background: -o-linear-gradient(180deg, #2C2F38 0%, #3A3F47 40%, #2962FF 100%);     /* Opera */
+    background: linear-gradient(180deg, #2C2F38 0%, #3A3F47 40%, #2962FF 100%);
 }
 
-/* SUBTILUS ŠVYTĖJIMAS (Shine Overlay) */
+/* ŠVYTĖJIMAS */
 .feature-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: linear-gradient(
-        135deg, 
-        rgba(255, 255, 255, 0.15) 0%, /* Šiek tiek sumažinta, kad nebūtų per daug blizgu */
-        rgba(255, 255, 255, 0) 40%
-    );
-    border-radius: 12px;
-    opacity: 0.8; 
-    z-index: 1; 
+    /* ... pozicionavimas ... */
+    
+    /* ŠVYTĖJIMO GRADIENTAS */
+    background: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 40%);
+    background: -moz-linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 40%);
+    background: -o-linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 40%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 40%);
+    /* ... */
 }
 
-/* HOVER LIFT EFFECT (Pakėlimo efektas) */
+/* HOVER LIFT EFFECT (PAKĖLIMO EFEKTAS) */
 .feature-card:hover {
-    transform: translateY(-8px); /* Pakelia kortelę 8px aukštyn */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); /* Padidina šešėlį */
+    /* Transformacijai ypač svarbu naudoti priešdėlius */
+    -webkit-transform: translateY(-8px); /* Safari, Chrome */
+    -moz-transform: translateY(-8px);    /* Firefox */
+    -ms-transform: translateY(-8px);     /* IE 9 */
+    -o-transform: translateY(-8px);      /* Opera */
+    transform: translateY(-8px);
+    
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); 
 }
 
 /* TEKSTO STILIAI PAGAL TIPOGRAFIJOS REIKALAVIMUS */
